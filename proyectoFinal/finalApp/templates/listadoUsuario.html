@@ -16,7 +16,12 @@
     <th> {{u.nombre}} </th>
     <th> {{u.apellido}} </th> -
     <th> {{u.mail}}</th>
-    </li>
+    </li> <a href="{% url 'eliminarUsuario' u.mail %}">Eliminar Usuario</a> 
     {% endfor %}
+<body>
+  <a href="{% url 'registroUsuario' %}">AGREGAR USUARIO</a>
+    
+</body>
+  
     
 {% endblock %}

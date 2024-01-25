@@ -13,6 +13,13 @@ urlpatterns = [
     
     path("listar-usuarios/", listarUsuarios, name = "listarUsuarios"),
     path("listar-publicaciones/", listarPublicaciones, name = "listarPublicaciones"),
+    path("listar-comentarios/", listarComentarios, name = "listarComentarios"),
+
+    path("eliminar-usuario/<usuario>", eliminarUsuario, name = "eliminarUsuario"),
+    path("eliminar-publicacion/<publicacion>", eliminarPublicacion, name = "eliminarPublicacion"),
+    path("eliminar-comentarios/<comentario>", eliminarComentario, name = "eliminarComentario"),
+
+    path("editar-publicacion/<pk>", editarPublicaciones.as_view() , name = "Edit"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

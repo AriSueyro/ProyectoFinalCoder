@@ -5,18 +5,19 @@
     <div class="container position-relative">
       <div class="row d-flex justify-content-center">
         <div class="col-lg-6 text-center">
-          <h2>Listado de Publicaciones</h2>
+          <h2>Listado de comentarios</h2>
         </div>
       </div>
     </div>
   </div>
 
-    {% for u in publicaciones %}
+    {% for u in comentarios %}
     <li>
-    <th> Titulo: {{u.titulo}} </th> -
-    <th> <img src="{{ u.imagen.url }}" style="max-width: 200px; max-height: 150px;"></th>
-    </li><a href="{% url 'eliminarPublicacion' u.titulo %}">Eliminar publicacion</a> 
-         <a href="{% url 'Edit' u.id %}">Editar</a>
+    <th> {{u.asunto}} </th> -
+    <th> {{u.texto}} </th> -
+    <th> {{u.fecha}}</th>
+    </li>
+    <a href="{% url 'eliminarComentario' u.asunto %}">Eliminar publicacion</a> 
     {% endfor %}
     
 {% endblock %}
