@@ -15,6 +15,7 @@
     <li>
     <th> Titulo: {{u.titulo}} </th> -
     <th> <img src="{{ u.imagen.url }}" style="max-width: 200px; max-height: 150px;"></th>
+    <th> Fecha: {{u.fecha}} </th>
     </li><a href="{% url 'eliminarPublicacion' u.titulo %}">Eliminar publicacion</a> 
          <a href="{% url 'editarPublicacion' u.titulo %}">Editar</a>
     {% endfor %}
