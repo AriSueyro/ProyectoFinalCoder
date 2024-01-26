@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Usuario(models.Model):
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
@@ -12,10 +13,11 @@ class Usuario(models.Model):
 class Publicacion(models.Model):
     titulo = models.CharField(max_length=50)
     detalle = models.CharField(max_length=500)
+    fecha = models.DateTimeField(auto_now_add=True)
     imagen = models.FileField(upload_to='static/img/', null = True)
 
     def __str__(self):
-        return (f"{self.titulo}, {self.detalle}, {self.image}")
+        return (f"{self.titulo}, {self.detalle}")
 
 class Comentario(models.Model):
     asunto = models.CharField(max_length=50)
@@ -24,4 +26,5 @@ class Comentario(models.Model):
 
     def __str__(self):
         return (f"{self.asunto}, {self.texto}, {self.fecha}")
+
 
