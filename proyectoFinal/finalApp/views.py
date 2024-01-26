@@ -7,30 +7,39 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate
 
 
+def index(request):
+    return render(request, 'index.html')
+
+
 def registrar(request):
     if request.method == "POST":
-        form = UserCreationForm(request, data = request.POST)
-        if form.is_valid():
-            datos = form.cleanded_data 
+        formulario = UserCreationForm(request.POST)
+        
+        if formulario.is_valid():
 
-            pass
+            username = formulario.cleaned_data["username"]
 
-        formulario = UserCreationForm()
+            formulario.save()
 
-        return render(request, "registrar.html", {"formulario": formulario})
+            return render(request, "index.html", {"mensaje": f"El Username {username} fue dado de alta"})
+
+    formulario = UserCreationForm()
+
+    return render(request, "registrar.html", {"formulario": formulario})
 
 
 def login_request(request):
-
+    
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            datos = form.cleaned_data
+        formulario = AuthenticationForm(request, data = request.POST)
+      
+        if formulario.is_valid():
+            datos = formulario.cleaned_data
 
             username = datos["username"]
             password = datos["password"]
 
-            user = authenticate(username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
             if user is not None:
                 login(request, user)    
@@ -41,8 +50,13 @@ def login_request(request):
         else:
 
             return render(request, "index.html", {"mensaje": f"Datos invalidos"})
+    
+    formulario = AuthenticationForm()
+    
+    return render(request, "formulario.html", {"formulario": formulario})
 
-
+def logout(request):
+    pass
 
     
     formulario = AuthenticationForm()

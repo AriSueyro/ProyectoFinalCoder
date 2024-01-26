@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Usuario(models.Model):
@@ -13,8 +14,8 @@ class Usuario(models.Model):
 class Publicacion(models.Model):
     titulo = models.CharField(max_length=50)
     detalle = models.CharField(max_length=500)
-    fecha = models.DateTimeField(auto_now_add=True)
     imagen = models.FileField(upload_to='static/img/', null = True)
+    fecha = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return (f"{self.titulo}, {self.detalle}")
