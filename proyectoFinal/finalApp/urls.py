@@ -10,7 +10,7 @@ urlpatterns = [
 
     path("", index, name = "index"),
 
-    path("registro-usuario/", registroUsuario, name = "registroUsuario"),
+    # path("registro-usuario/", registroUsuario, name = "registroUsuario"),
     path("registro-publicacion/", registroPublicacion, name = "registroPublicacion"),
     path("registro-comentario/", registroComentario, name = "registroComentario"),
     
