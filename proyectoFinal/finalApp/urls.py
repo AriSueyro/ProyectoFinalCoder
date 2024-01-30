@@ -26,7 +26,7 @@ urlpatterns = [
 
     path("login/", login_request, name = "login"),
     path("registrar/", registrar, name = "registrar"),
-    path("logout/", LogoutView.as_view(template_name= "logout.html"), name = "logout"),
+    path("logout/", LogoutView.as_view(template_name='logout.html'), name = "logout"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

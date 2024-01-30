@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from finalApp.forms import *
 from finalApp.models import *
 from django.views.generic import UpdateView
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.contrib.auth import login, authenticate
 
 
@@ -13,7 +13,7 @@ def index(request):
 
 def registrar(request):
     if request.method == "POST":
-        formulario = UserCreationForm(request.POST)
+        formulario = UserRegisterForma(request.POST)
         
         if formulario.is_valid():
 
@@ -23,7 +23,7 @@ def registrar(request):
 
             return render(request, "index.html", {"mensaje": f"El Username {username} fue dado de alta"})
 
-    formulario = UserCreationForm()
+    formulario = UserRegisterForma()
 
     return render(request, "registrar.html", {"formulario": formulario})
 
@@ -55,7 +55,7 @@ def login_request(request):
     
     return render(request, "formulario.html", {"formulario": formulario})
 
-def logout(request):
+def logou(request):
     pass
 
     
