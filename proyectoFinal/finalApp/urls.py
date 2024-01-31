@@ -23,6 +23,7 @@ urlpatterns = [
     path("eliminar-comentarios/<comentario>/", eliminarComentario, name = "eliminarComentario"),
 
     path("editar-publicacion/<publicacion_nombre>/", editarPublicacion , name = "editarPublicacion"),
+    path("mostrar-publicaciones", mostrarPublicaciones, name = "mostrarPublicaciones"),
 
     path("login/", login_request, name = "login"),
     path("registrar/", registrar, name = "registrar"),

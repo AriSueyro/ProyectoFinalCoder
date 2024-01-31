@@ -157,6 +157,13 @@ def listarPublicaciones(request):
 
     return render(request, "listadoPublicaciones.html", contexto)
 
+def mostrarPublicaciones(request):
+    publicaciones = Publicacion.objects.all()
+
+    contexto = {'publicaciones' : publicaciones}
+
+    return render(request, "gallery2.html", contexto)
+
 def editarPublicacion(request, publicacion_nombre):
 
     publicacion = get_object_or_404(Publicacion, titulo=publicacion_nombre)
