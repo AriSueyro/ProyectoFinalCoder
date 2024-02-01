@@ -5,6 +5,7 @@ from finalApp.models import *
 from django.views.generic import UpdateView
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -84,6 +85,7 @@ def registroUsuario(request):
 
     return render(request, "formUsuario.html", {'formulario': formulario})
 
+@login_required
 def editarPerfil(request):
 
     usuario = request.user
@@ -114,6 +116,7 @@ def editarPerfil(request):
 
         return render(request, "editarPerfil.html", {'formulario': formulario, 'usuario': usuario})
 
+@login_required
 def listarUsuarios(request):
     usuarios = Usuario.objects.all()
 
@@ -121,6 +124,7 @@ def listarUsuarios(request):
 
     return render(request, "listadoUsuario.html", contexto)
 
+@login_required
 def eliminarUsuario(request, usuario):
     usuario = Usuario.objects.get(mail = usuario)
     usuario.delete()
@@ -132,7 +136,7 @@ def eliminarUsuario(request, usuario):
     return render(request, "listadoUsuario.html", contexto)
 
 
-
+@login_required
 def registroPublicacion(request):
 
     if request.method == "POST":
@@ -150,6 +154,7 @@ def registroPublicacion(request):
 
     return render(request, "formPublicacion.html", {'formulario': formulario})
 
+@login_required
 def listarPublicaciones(request):
     publicaciones = Publicacion.objects.all()
 
@@ -157,6 +162,7 @@ def listarPublicaciones(request):
 
     return render(request, "listadoPublicaciones.html", contexto)
 
+@login_required
 def mostrarPublicaciones(request):
     publicaciones = Publicacion.objects.all()
 
@@ -164,6 +170,7 @@ def mostrarPublicaciones(request):
 
     return render(request, "gallery2.html", contexto)
 
+@login_required
 def editarPublicacion(request, publicacion_nombre):
 
     publicacion = get_object_or_404(Publicacion, titulo=publicacion_nombre)
@@ -187,7 +194,7 @@ def editarPublicacion(request, publicacion_nombre):
     contexto = {'formulario': formulario, 'publicacion_nombre': publicacion_nombre, 'publicacion_detalle': publicacion.detalle, 'publicacion_imagen': publicacion.imagen}
     return render(request, "editarPublicacion.html", contexto)
 
-
+@login_required
 def eliminarPublicacion(request, publicacion):
     publicacion = Publicacion.objects.get(titulo = publicacion)
     publicacion.delete()
@@ -199,6 +206,7 @@ def eliminarPublicacion(request, publicacion):
     return render(request, "listadoPublicaciones.html", contexto)
 
 
+@login_required
 def registroComentario(request):
 
     if request.method == "POST":
@@ -216,7 +224,7 @@ def registroComentario(request):
 
     return render(request, "formComentario.html", {'formulario' : formulario})    
 
-
+@login_required
 def listarComentarios(request):
     comentarios = Comentario.objects.all()
 
@@ -224,6 +232,8 @@ def listarComentarios(request):
 
     return render(request, "listadoComentarios.html", contexto)
 
+
+@login_required
 def eliminarComentario(request, comentario):
     comentario = Comentario.objects.get(asunto = comentario)
     comentario.delete()
