@@ -56,20 +56,10 @@ def login_request(request):
     
     return render(request, "formulario.html", {"formulario": formulario})
 
-def logou(request):
-    pass
-
-    
-    formulario = AuthenticationForm()
-
-    return render(request, "login.html", {'formulario': formulario})
-
-
-
 def registroUsuario(request):
 
     if request.method == "POST":
-        formulario = UserRegistrationForm(request.POST)
+        formulario = UserRegistrationForma(request.POST)
 
         if formulario.is_valid():
            # datos = formulario.cleaned_data
@@ -81,7 +71,7 @@ def registroUsuario(request):
             return render(request, "index.html", {"mensaje": f"Se dio de alta el ususario {username}"})
         
     else:
-        formulario = UserRegistrationForm()
+        formulario = UserRegistrationForma()
 
     return render(request, "formUsuario.html", {'formulario': formulario})
 
@@ -92,7 +82,7 @@ def editarPerfil(request):
 
     if request.method == "POST":
         
-        formulario = UserEditForm(request.POST)
+        formulario = UserChangeForm(request.POST)
 
         if formulario.is_valid():
 
@@ -112,7 +102,7 @@ def editarPerfil(request):
 
     else:
 
-        formulario = UserEditForm(initial = {'email': usuario.email})
+        formulario = UserChangeForm(initial = {'email': usuario.email})
 
         return render(request, "editarPerfil.html", {'formulario': formulario, 'usuario': usuario})
 
@@ -243,6 +233,10 @@ def eliminarComentario(request, comentario):
     contexto = {"comentarios": comentarios}
 
     return render(request, "listadoComentarios.html", contexto)
+
+
+def about(request):
+    return render(request, "about.html")
 
 
 
