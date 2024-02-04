@@ -5,7 +5,11 @@ from finalApp.models import *
 from django.views.generic import UpdateView
 from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+
+def is_admin(user):
+    return user.is_authenticated and user.is_superuser
 
 
 def index(request):
@@ -107,19 +111,21 @@ def editarPerfil(request):
         return render(request, "editarPerfil.html", {'formulario': formulario, 'usuario': usuario})
 
 @login_required
+@user_passes_test(is_admin)
 def listarUsuarios(request):
-    usuarios = Usuario.objects.all()
+    usuarios = User.objects.all()
 
     contexto = {"usuarios": usuarios}
 
     return render(request, "listadoUsuario.html", contexto)
 
 @login_required
+@user_passes_test(is_admin)
 def eliminarUsuario(request, usuario):
-    usuario = Usuario.objects.get(mail = usuario)
+    usuario = User.objects.get(username = usuario)
     usuario.delete()
 
-    usuarios = Usuario.objects.all()
+    usuarios = User.objects.all()
 
     contexto = {"usuarios": usuarios}
 
@@ -145,6 +151,7 @@ def registroPublicacion(request):
     return render(request, "formPublicacion.html", {'formulario': formulario})
 
 @login_required
+@user_passes_test(is_admin)
 def listarPublicaciones(request):
     publicaciones = Publicacion.objects.all()
 
@@ -153,6 +160,7 @@ def listarPublicaciones(request):
     return render(request, "listadoPublicaciones.html", contexto)
 
 @login_required
+@user_passes_test(is_admin)
 def mostrarPublicaciones(request):
     publicaciones = Publicacion.objects.all()
 
@@ -185,6 +193,7 @@ def editarPublicacion(request, publicacion_nombre):
     return render(request, "editarPublicacion.html", contexto)
 
 @login_required
+@user_passes_test(is_admin)
 def eliminarPublicacion(request, publicacion):
     publicacion = Publicacion.objects.get(titulo = publicacion)
     publicacion.delete()
@@ -224,6 +233,7 @@ def listarComentarios(request):
 
 
 @login_required
+@user_passes_test(is_admin)
 def eliminarComentario(request, comentario):
     comentario = Comentario.objects.get(asunto = comentario)
     comentario.delete()
